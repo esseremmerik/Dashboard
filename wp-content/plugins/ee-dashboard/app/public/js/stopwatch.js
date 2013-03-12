@@ -1,5 +1,3 @@
-var number = 0;
-
 var time = null;
 var timer_is_on=0;
 
@@ -10,39 +8,31 @@ var hour = 0;
 var current_hour=0;
 var current_min=0;
 
-//De hoofdfunctie die de stopwatch start en stopt
-function initStopwatch(){
-	var value = document.getElementById('startstop').value;
-	if(value==1){
-		document.getElementById('startstop').innerHTML="Stop";
-		document.getElementById('startstop').value="2";
-		document.getElementById('startstop').setAttribute("class", "btn btn-large btn-important");
-		document.getElementById('startstop').setAttribute("href", "");
-		clockStart();
-	}
-	if(value==2){
-		document.getElementById('startstop').innerHTML="Start";
-		document.getElementById('startstop').value="1";
-		document.getElementById('startstop').setAttribute("class", "btn btn-large btn-success");
-
-		clockStop();
-	}
-}
+var timerElementId = '';
 
 //Om de stopwatch te starten. Roept timer() elke 1000 microseconde (1 sec) aan.
-function clockStart(){
+function clockStart(timerElementId){
     if(!timer_is_on){
+    		document.getElementById(timerElementId).disabled="disabled";
             timer_is_on=1;
-            time=setInterval(timer, 1000);
-            timer();
+            time=setInterval(function(){timer(timerElementId)}, 1000);
     }
 }
 
+//Om de stopwatch te stoppen
+function clockStop(timerElementId) {
+	  document.getElementById(timerElementId).disabled="";
+	  document.getElementById("eindtijd").value=currentTime();
+	  showPopup(); //popup_timerecord_confirm.js
+	  clearInterval(time);
+	  timer_is_on= 0;
+	  document.getElementById(timerElementId).value="00:00:00";
+}
+
 //Een teller die bij elke aanroep 1 omhoog gaat.
-function timer(){
-	document.getElementById("time_recording").disabled="disabled";
-	var lol = document.getElementById("time_recording").value;
-	var strtime = lol.split(":");
+function timer(timerElementId){
+	var element = document.getElementById(timerElementId).value;
+	var strtime = element.split(":");
 	hour = strtime[0];
 	min = strtime[1];
 	sec = strtime[2];
@@ -62,19 +52,8 @@ function timer(){
     	sec = '0' + sec; 
     }
     if(document.getElementById("starttijd").value==''){document.getElementById("starttijd").value=currentTime();}
-    document.getElementById("time_recording").value=hour+':'+min+":"+ sec;
+    document.getElementById(timerElementId).value=hour+':'+min+":"+ sec;
 }
-
-//Om de stopwatch te stoppen
-function clockStop() {
-	  document.getElementById("time_recording").disabled="";
-	  document.getElementById("eindtijd").value=currentTime();
-	  showPopup(); //popup_timerecord_confirm.js
-	  clearInterval(time);
-	  timer_is_on= 0;
-	  document.getElementById("time_recording").value="00:00:00";
-}
-
 
 //geeft de huidige tijd in hh:mm
 function currentTime(){
