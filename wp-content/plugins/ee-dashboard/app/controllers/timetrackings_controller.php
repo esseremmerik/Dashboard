@@ -752,5 +752,16 @@ class TimetrackingsController extends MvcPublicController {
 		update_ownership();
 		return;
 	}
+	function saveTimeObj(){
+		$autocomplete 		= $_POST['autocomplete'];
+		$solve360_taskid 	= $_POST['solve360_taskid'];
+		$wp_taskid			= $_POST['wp_taskid'];
+		$tasklistid			= $_POST['tasklistid'];
+		$details			= $_POST['details'];
+		echo 'test123';
+		//wp user id
+		//timestamp current time
+		exit();
+	}
 }
 ?>
