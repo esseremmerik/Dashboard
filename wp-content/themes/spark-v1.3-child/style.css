@@ -1,0 +1,13 @@
+/*
+Theme Name:     Spark Child Theme
+Theme URI:      http://themeforest.net/item/spark-responsive-onepage-html5-wordpress-theme/2372522?ref=JoNa
+Description:    Activate and edit this theme in order to easily override features of the main Spark theme, which you can update independantely without loosing your changes.
+Author:         You
+Template:       spark-v1.3
+Version:        1.0
+*/
+
+/* Just an example to show that the child theme is active */
+html, body, header, .dark {
+	background: red !important;
+}

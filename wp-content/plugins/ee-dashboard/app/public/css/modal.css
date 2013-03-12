@@ -1,0 +1,18 @@
+.modal.fade.in{
+}
+.modal{
+	z-index:9998;
+	background-color:lightblue;
+}
+.model-header{}
+.modal-footer{
+	background-color: lightblue;
+}
+#datepicker{ color: #427FFF !important;}
+#modal_beschrijving{width:500px;}
+#modal_taskname{width:500px;}
+#modal_duur{width: 75px;}
+#modal_starttijd{width: 75px;}
+#modal_eindtijd{width: 75px;}
+#modal_datum{width: 100px;}
+#save_timerecord{width:100px;}

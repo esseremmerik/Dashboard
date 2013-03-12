@@ -1,0 +1,2 @@
+2012-10-01 16:31:52: a:4:{s:4:"code";s:6:"{code}";s:8:"callerid";s:10:"{callerid}";s:3:"did";s:5:"{did}";s:10:"callername";s:12:"{callername}";}
+2012-10-01 16:37:14: a:4:{s:4:"code";s:0:"";s:8:"callerid";s:12:"+31357009704";s:3:"did";s:12:"+31357009703";s:10:"callername";s:3:"203";}

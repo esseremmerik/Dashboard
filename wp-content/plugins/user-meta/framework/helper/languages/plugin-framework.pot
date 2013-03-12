@@ -1,0 +1,189 @@
+# Copyright (C) 2012 User Meta http://user-meta.com
+# This file is distributed under the same license as the User Meta package.
+msgid ""
+msgstr ""
+"Project-Id-Version: plugin-framework 1.0.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-08-30 16:15+0600\n"
+"PO-Revision-Date: 2012-08-30 16:15+0600\n"
+"Last-Translator: Khaled Saikat <support@user-meta>\n"
+"Language-Team: User Meta Pro <support@user-meta.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: _;gettext;gettext_noop;__;_e\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SearchPath-0: /framework\n"
+
+#: /framework/helper/uploader.php:152
+#: /framework/models/PluginFrameworkWPSupport.php:230
+msgid "Server error. Upload directory is not writable."
+msgstr ""
+
+#: /framework/helper/uploader.php:156
+msgid "No files were uploaded."
+msgstr ""
+
+#: /framework/helper/uploader.php:162
+msgid "File is empty"
+msgstr ""
+
+#: /framework/helper/uploader.php:166
+msgid "File is too large"
+msgstr ""
+
+#: /framework/helper/uploader.php:178
+#: /framework/models/PluginFrameworkWPSupport.php:250
+#, php-format
+msgid "File %1$s has an invalid extension, it should be one of %2$s."
+msgstr ""
+
+#: /framework/helper/uploader.php:195
+#: /framework/models/PluginFrameworkWPSupport.php:262
+msgid "Could not save uploaded file."
+msgstr ""
+
+#: /framework/helper/uploader.php:196
+#: /framework/models/PluginFrameworkWPSupport.php:263
+msgid "The upload was cancelled, or server error encountered"
+msgstr ""
+
+#: /framework/models/PluginFrameworkArray.php:22
+msgid "Username"
+msgstr ""
+
+#: /framework/models/PluginFrameworkArray.php:23
+msgid "E-mail"
+msgstr ""
+
+#: /framework/models/PluginFrameworkArray.php:24
+#: /framework/phpunit/models/PluginFrameworkArrayTest.php:34
+msgid "Password"
+msgstr ""
+
+#: /framework/models/PluginFrameworkArray.php:25
+msgid "Nicename"
+msgstr ""
+
+#: /framework/models/PluginFrameworkArray.php:26
+msgid "Website"
+msgstr ""
+
+#: /framework/models/PluginFrameworkArray.php:27
+msgid "Display Name"
+msgstr ""
+
+#: /framework/models/PluginFrameworkArray.php:28
+msgid "Nickname"
+msgstr ""
+
+#: /framework/models/PluginFrameworkArray.php:29
+msgid "First Name"
+msgstr ""
+
+#: /framework/models/PluginFrameworkArray.php:30
+msgid "Last Name"
+msgstr ""
+
+#: /framework/models/PluginFrameworkArray.php:31
+msgid "Description"
+msgstr ""
+
+#: /framework/models/PluginFrameworkArray.php:32
+msgid "Registration Date"
+msgstr ""
+
+#: /framework/models/PluginFrameworkArray.php:33
+msgid "Role"
+msgstr ""
+
+#: /framework/models/PluginFrameworkArray.php:34
+msgid "Jabber"
+msgstr ""
+
+#: /framework/models/PluginFrameworkArray.php:35
+msgid "Aim"
+msgstr ""
+
+#: /framework/models/PluginFrameworkArray.php:36
+msgid "Yim"
+msgstr ""
+
+#: /framework/models/PluginFrameworkBuiltinFunction.php:22
+msgid "<strong>ERROR</strong>: Enter a username or e-mail address."
+msgstr ""
+
+#: /framework/models/PluginFrameworkBuiltinFunction.php:36
+msgid "<strong>ERROR</strong>: Invalid username or e-mail."
+msgstr ""
+
+#: /framework/models/PluginFrameworkBuiltinFunction.php:50
+msgid "Password reset is not allowed for this user"
+msgstr ""
+
+#: /framework/models/PluginFrameworkBuiltinFunction.php:74
+msgid "Someone requested that the password be reset for the following account:"
+msgstr ""
+
+#: /framework/models/PluginFrameworkBuiltinFunction.php:76
+#, php-format
+msgid "Username: %s"
+msgstr ""
+
+#: /framework/models/PluginFrameworkBuiltinFunction.php:77
+msgid "If this was a mistake, just ignore this email and nothing will happen."
+msgstr ""
+
+#: /framework/models/PluginFrameworkBuiltinFunction.php:78
+msgid "To reset your password, visit the following address:"
+msgstr ""
+
+#: /framework/models/PluginFrameworkBuiltinFunction.php:89
+#, php-format
+msgid "[%s] Password Reset"
+msgstr ""
+
+#: /framework/models/PluginFrameworkBuiltinFunction.php:96
+msgid ""
+"The e-mail could not be sent. Possible reason: your host may have disabled "
+"the mail() function..."
+msgstr ""
+
+#: /framework/models/PluginFrameworkBuiltinFunction.php:120
+#: /framework/models/PluginFrameworkBuiltinFunction.php:123
+#: /framework/models/PluginFrameworkBuiltinFunction.php:128
+msgid "Invalid key"
+msgstr ""
+
+#: /framework/models/PluginFrameworkWPSupport.php:17
+msgid "Security check"
+msgstr ""
+
+#: /framework/models/PluginFrameworkWPSupport.php:21
+msgid "Security check: admin only"
+msgstr ""
+
+#: /framework/models/PluginFrameworkWPSupport.php:159
+msgid "Cannot create a user with an empty login name and empty email"
+msgstr ""
+
+#: /framework/models/PluginFrameworkWPSupport.php:220
+msgid "No file upload field found!"
+msgstr ""
+
+#: /framework/models/PluginFrameworkWPSupport.php:227
+msgid "File is empty."
+msgstr ""
+
+#: /framework/models/PluginFrameworkWPSupport.php:233
+#, php-format
+msgid "File %s is too large."
+msgstr ""
+
+#: /framework/views/metaBox.php:4
+msgid "Click to Remove"
+msgstr ""
+
+#: /framework/views/metaBox.php:12
+msgid "Click to toggle"
+msgstr ""
