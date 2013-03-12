@@ -14,7 +14,7 @@ wp_enqueue_script('timerec', mvc_js_url('ee-dashboard', 'timetracking.js'));
 wp_enqueue_script('jquery.autocomplete', mvc_js_url('ee-dashboard', 'jquery.autocomplete.js'));
 ?>
 
-<?php //update_timerecords();?>
+<?php //test //update_timerecords();?>
 
 <div><?php $this->render_view('layouts/_timerecording_block'); ?></div>
 
