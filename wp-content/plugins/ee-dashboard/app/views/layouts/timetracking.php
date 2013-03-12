@@ -18,7 +18,7 @@ wp_enqueue_script('jquery.autocomplete', mvc_js_url('ee-dashboard', 'jquery.auto
 
 <div><?php $this->render_view('layouts/_timerecording_block'); ?></div>
 
-<button class='btn btn-large btn-success' onclick="showTop5();">Top5</button></a>
+<button class='btn btn-large btn-success' onclick="showTop5();">Top50</button></a>
 <button class='btn btn-large btn-success' onclick="showAllTasks();">Alle open taken</button></a>
 <button class='btn btn-large btn-success' onclick="showAllTimerecords();">Alle tijdregistraties</button></a>
 <button class='btn btn-large btn-success' onclick="showGhostTimerecords();">Niet gekoppelde tijdregistraties</button></a>
