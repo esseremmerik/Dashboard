@@ -1,5 +1,5 @@
 <?php wp_enqueue_script('stopwatch', mvc_js_url('ee-dashboard', 'stopwatch.js')); ?>
-<?php wp_enqueue_script('timerecording_block_js', mvc_js_url('ee-dashboard', '_timerecording_block.js')); ?>
+<?php wp_enqueue_script('timerecordingblockjs', mvc_js_url('ee-dashboard', '_timerecording_block.js')); ?>
 <?php wp_enqueue_style('timerecordingblock', '/wp-content/plugins/ee-dashboard/app/public/css/_timerecording_block.css'); ?>
 
 <!-- ======= Blok waar je een nieuwe tijdregistratie kan starten ======= -->	
@@ -8,7 +8,7 @@
 	
 	<input id='activiteit' type='text' placeholder='Benoem je activiteit' onfocus="change(1)">
 	<input type="text" name="fname" id="time_recording" value="00:00:00"/>
-	<button id="startstop" class="btn btn-large btn-warning" onclick="initStopwatch()" value="1" href=""><i id='timericon' class="icon-warning-sign"></i> Start</button>
+	<button id="startstop" class="btn btn-large btn-warning" onclick="initTimer()" value="1" href=""><i id='timericon' class="icon-warning-sign"></i> Start</button>
 	<div id='labelwarning'>
 		<span id='warning_header'>Warning: <span style='font-size:12px;margin-left:5px;'>geen taak geselecteerd</span></span>
 	</div>
