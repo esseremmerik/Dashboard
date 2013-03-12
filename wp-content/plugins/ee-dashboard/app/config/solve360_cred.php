@@ -1,9 +1,9 @@
 <?php
 
     // REQUIRED Edit with your email address
-    define('USER', 'peter@esser-emmerik.nl');
+    define('USER', 'ijsbrand2004@gmail.com');
     // REQUIRED Edit with token, Workspace > My Account > API Reference > API Token                             
-    define('TOKEN', '44V0jaP5R8H4af5e3fg0W2O9j2P4naB2I2z6tdnb');  
+    define('TOKEN', 'scI7l7bag7C0Q9zcAdf9Bdafjdb3f9ffi7z2PbMb');  
     
     //Field id's van Projecblogs
     define('TITLE_PROJECTBLOGS', '8994423');
