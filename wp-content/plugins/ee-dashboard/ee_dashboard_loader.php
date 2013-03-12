@@ -124,6 +124,20 @@ class EeDashboardLoader extends MvcPluginLoader {
 				PRIMARY KEY (id)
 			)';
 		dbDelta($sql);
+		
+		$sql = "
+			CREATE TABLE IF NOT EXISTS `wp_ee_current_timerecording` (
+  				`ID` int(11) NOT NULL AUTO_INCREMENT,
+  				`timestamp_start` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  				`wp_user_id` int(11) NOT NULL,
+  				`autocomplete` varchar(255) DEFAULT '-',
+  				`solve360_task_id` int(15) DEFAULT '0',
+  				`wp_task_id` int(15) DEFAULT '0',
+  				`tasklist_id` int(15) DEFAULT '0',
+  				`beschrijving` varchar(255) DEFAULT '-',
+  				PRIMARY KEY (`ID`)
+			) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1";
+		dbDelta($sql);
 				
 	}
 
