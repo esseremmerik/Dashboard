@@ -135,6 +135,7 @@ class EeDashboardLoader extends MvcPluginLoader {
   				`wp_task_id` int(15) DEFAULT '0',
   				`tasklist_id` int(15) DEFAULT '0',
   				`beschrijving` varchar(255) DEFAULT '-',
+				`price_per_hour` INT(3) DEFAULT '0',
   				PRIMARY KEY (`ID`)
 			) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1";
 		dbDelta($sql);

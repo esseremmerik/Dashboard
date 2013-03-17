@@ -23,20 +23,49 @@ function change(action)
 function hideTrackBlock(){
 	document.getElementById("timerecording_block").style.height=115+"px";
 }
-
-//wanneer een taak is geselecteerd moet start button groen worden
-jQuery("#content").mouseover(function() {
-	if(document.getElementById('parentid').value!=""){
-		taskValidation(1);
-		if(document.getElementById('startstop').getAttribute("class")=='btn btn-large btn-warning'){
-		document.getElementById('startstop').setAttribute("class", "btn btn-large btn-success");
+jQuery(document).ready(function() {
+	jQuery.post('getTimeObject', {},function(data){})
+	.complete(function(data){
+		if(data.responseText){
+			var timerecordingObject = data.responseText;
+			var splitTimerecordingObject = timerecordingObject.split(';;;');
+			
+			var autocompleteText = splitTimerecordingObject[0];
+			var solve360TaskId   = splitTimerecordingObject[1];
+			var wpTaskId		 = splitTimerecordingObject[2];
+			var tasklistId		 = splitTimerecordingObject[3];
+			var details			 = splitTimerecordingObject[4];
+			var durationInHourMinutesSeconds= splitTimerecordingObject[5];
+			var startTime		 = splitTimerecordingObject[6];
+			var profitPerHour    = splitTimerecordingObject[7];
+			
+			document.getElementById('activiteit').focus();
+			document.getElementById('activiteit').value = details;
+			document.getElementById('timerecording_autocomplete').value = autocompleteText;
+			document.getElementById('parentid').value = solve360TaskId;
+			document.getElementById('key').value = wpTaskId;
+			document.getElementById('tasklistid').value = tasklistId;
+			document.getElementById('time_recording').value = durationInHourMinutesSeconds;
+			document.getElementById('starttijd').value = startTime;
+			document.getElementById('pricing').value = profitPerHour;
+			
+			document.getElementById('startstop').click();
 		}
-	}
-});
-jQuery('.autocomplete-ajax').change(function(){
-	if(document.getElementById("timerecording_autocomplete").placeholder == 'Benoem taak of project'){
-		taskValidation(2);
-	}
+	});
+	//wanneer een taak is geselecteerd moet start button groen worden
+	jQuery("#content").mouseover(function() {
+		if(document.getElementById('parentid').value!=""){
+			taskValidation(1);
+			if(document.getElementById('startstop').getAttribute("class")=='btn btn-large btn-warning'){
+			document.getElementById('startstop').setAttribute("class", "btn btn-large btn-success");
+			}
+		}
+	});
+	jQuery('.autocomplete-ajax').change(function(){
+		if(document.getElementById("timerecording_autocomplete").placeholder == 'Benoem taak of project'){
+			taskValidation(2);
+		}
+	});
 });
 function taskValidation($number){
 	// 1=ingevuld en goed

@@ -8,6 +8,7 @@ class TimetrackingsController extends MvcPublicController {
 
 		$this->load_model('Timerecord');
 		$this->load_model('Task');
+		$this->load_model('Timerecording');
 	
 		
 	    $owners = $this->Ownership->find();
@@ -22,6 +23,9 @@ class TimetrackingsController extends MvcPublicController {
 	    $timerecords = $this->Timerecord->find();
 	    $this->set('timerecords', $timerecords);
 	  
+	    $timerecording = $this->Timerecording->find();
+	    $this->set('timerecording', $timerecording);
+	    
 	    $this->render_view('index', array('layout' => 'timetracking'));
     }
     
@@ -761,30 +765,103 @@ class TimetrackingsController extends MvcPublicController {
 	 * <br />- The task id from WordPress. This is the primary key of the task table.
 	 * <br />- The tasklist id from WordPress. This is identical to the one from Solve360
 	 */
-	function saveTimeObj(){
+	function saveTimeObject(){
 		$autocomplete 		= $_POST['autocomplete'];
 		$solve360_taskid 	= $_POST['solve360_taskid'];
 		$wp_taskid			= $_POST['wp_taskid'];
 		$tasklistid			= $_POST['tasklistid'];
 		$details			= $_POST['details'];
+		$pricePerHour		= $_POST['pricePerHour'];
 		
 		$this->load_model('Ownership');
 		$current_solve_user = $this->current_solve_user();
 		$solve360_user_id = $current_solve_user->id;
 		
 		$data = array(
-			'id' 			  => '',
-			'timestamp_start' => time(),
 			'wp_user_id'	  => $solve360_user_id,
 			'autocomplete'	  => $autocomplete,
 			'solve360_task_id'=> $solve360_taskid,
 			'wp_task_id'	  => $wp_taskid,
 			'tasklist_id'	  => $tasklistid,
 			'beschrijving'	  => $details,
+			'price_per_hour'  => $pricePerHour,
 		);
 		global $wpdb;
-		$wpdb->insert('wp_ee_current_timerecording', $data);
 		
+		$this->load_model('Timerecording');
+		
+		$current_solve_user = $this->current_solve_user();
+		$timerecordingObject = $this->Timerecording->find_one(array(
+				'conditions' => array(
+						'wp_user_id' => $current_solve_user->id,
+				),
+		));
+		if(!$timerecordingObject){
+			$this->Timerecording->insert($data);
+		}
+		
+		exit();
+	}
+	
+	/**
+	 * Function to retrieve the timeobject of the current user from the WordPress database. 
+	 *
+	 */
+	function getTimeObject(){
+		$this->load_model('Timerecording');
+		$this->load_model('Ownership');
+		
+		$current_solve_user = $this->current_solve_user();
+
+		$timerecordingObject = $this->Timerecording->find_one(array(
+				'conditions' => array(
+						'wp_user_id' => $current_solve_user->id,
+				),
+		));
+		
+		$timestamp_start = (strtotime($timerecordingObject->timestamp_start)-3599);
+		$timestamp_end = time();
+		$durationInSeconds = $timestamp_end - $timestamp_start;
+		$seconds = $durationInSeconds%60;
+		if($seconds<10){$seconds = '0'.$seconds;}
+		$minutes = floor($durationInSeconds/60);
+		if($minutes<10){$minutes='0'.$minutes;}
+		$hours = floor(($durationInSeconds/60)/60);
+		if($hours<10){$hours='0'.$hours;}
+		$durationInHourMinutesSeconds = $hours.':'.$minutes.':'.$seconds;
+		
+		$startTimeArray = explode(' ', $timerecordingObject->timestamp_start);
+		$startTime = $startTimeArray[1];
+		$startTimeArray = explode(':', $startTime);
+		$startTime = $startTimeArray[0].':'.$startTimeArray[1];
+		
+		if($timerecordingObject){
+			echo $timerecordingObject->autocomplete.';;;'.
+				 $timerecordingObject->solve360_task_id.';;;'.
+				 $timerecordingObject->wp_task_id.';;;'.
+			     $timerecordingObject->tasklist_id.';;;'.
+			     $timerecordingObject->beschrijving.';;;'.
+				 $durationInHourMinutesSeconds.';;;'.
+				 $startTime.';;;'.
+				 $timerecordingObject->price_per_hour;
+		}
+		
+		exit();
+	}
+	function deleteTimeObject(){
+		$this->load_model('Timerecording');
+		$this->load_model('Ownership');
+		
+		$current_solve_user = $this->current_solve_user();
+		
+		$timerecordingObject = $this->Timerecording->find_one(array(
+				'conditions' => array(
+						'wp_user_id' => $current_solve_user->id,
+				),
+		));
+		if($timerecordingObject){
+			$this->Timerecording->delete($timerecordingObject->id);
+		}
 		exit();
 	}
 }

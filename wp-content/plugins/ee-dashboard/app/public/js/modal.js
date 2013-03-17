@@ -207,6 +207,17 @@ function save_timerecord(aTimerecord){
 		},
 		function(data){})
 		.success(function(){
+			document.getElementById('starttijd').value = '';
+			document.getElementById('timerecording_autocomplete').value = '';
+			document.getElementById('activiteit').value = '';
+			document.getElementById('eindtijd').value = '';
+			document.getElementById('parentid').value = '';
+			document.getElementById('itemid').value = '';
+			document.getElementById('pricing').value = '';
+			document.getElementById('tasklistid').value = '';
+			document.getElementById('extratime').value = '';
+			document.getElementById('key').value = '';
+			
 			refresh_taskTable();
 			refresh_timerecordTable();
 	});
