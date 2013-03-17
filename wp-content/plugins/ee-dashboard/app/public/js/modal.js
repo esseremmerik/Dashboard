@@ -110,7 +110,7 @@ jQuery(document).ready(function() {
 			aTimerecord['hours']			= form.elements['modal_hours'].value; 
 			aTimerecord['start']			= form.elements['modal_start'].value; 
 			aTimerecord['eind']				= form.elements['modal_eind'].value; 
-			aTimerecord['itemname']			= document.getElementById('modal_itemname').innerHTML;
+			aTimerecord['itemname']			= form.elements['modal_itemname'].value; 
 			aTimerecord['gewijzigd']		= 1;
 			
 			document.getElementById('extratime').value='';
