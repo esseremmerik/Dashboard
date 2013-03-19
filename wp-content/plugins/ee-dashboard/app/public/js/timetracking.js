@@ -24,9 +24,10 @@ function hideTrackBlock(){
 	document.getElementById("timerecording_block").style.height=115+"px";
 }
 jQuery(document).ready(function() {
-	jQuery.post('getTimeObject', {},function(data){})
+	jQuery.post('getTimerecording', {},function(data){})
 	.complete(function(data){
 		if(data.responseText){
+			console.log(data.responseText);
 			var timerecordingObject = data.responseText;
 			var splitTimerecordingObject = timerecordingObject.split(';;;');
 			

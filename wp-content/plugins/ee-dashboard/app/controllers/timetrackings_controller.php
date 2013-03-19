@@ -757,7 +757,7 @@ class TimetrackingsController extends MvcPublicController {
 		return;
 	}
 	/**
-	 * Function to save a object which contains information about a running time of a employee.
+	 * Function to save a timerecording which contains information about a running time of a employee.
 	 * <br />The idea is that when a employee starts the timer, this function is called.
 	 * <br />The next information should be in the post:
 	 * <br />- The value of the text field where you put your activity
@@ -765,41 +765,29 @@ class TimetrackingsController extends MvcPublicController {
 	 * <br />- The task id from WordPress. This is the primary key of the task table.
 	 * <br />- The tasklist id from WordPress. This is identical to the one from Solve360
 	 */
-	function saveTimeObject(){
-		$autocomplete 		= $_POST['autocomplete'];
-		$solve360_taskid 	= $_POST['solve360_taskid'];
-		$wp_taskid			= $_POST['wp_taskid'];
-		$tasklistid			= $_POST['tasklistid'];
-		$details			= $_POST['details'];
-		$pricePerHour		= $_POST['pricePerHour'];
-		
+	function saveTimerecording(){
 		$this->load_model('Ownership');
 		$current_solve_user = $this->current_solve_user();
 		$solve360_user_id = $current_solve_user->id;
 		
 		$data = array(
 			'wp_user_id'	  => $solve360_user_id,
-			'autocomplete'	  => $autocomplete,
-			'solve360_task_id'=> $solve360_taskid,
-			'wp_task_id'	  => $wp_taskid,
-			'tasklist_id'	  => $tasklistid,
-			'beschrijving'	  => $details,
-			'price_per_hour'  => $pricePerHour,
+			'autocomplete'	  => $_POST['autocomplete'],
+			'solve360_task_id'=> $_POST['solve360_taskid'],
+			'wp_task_id'	  => $_POST['wp_taskid'],
+			'tasklist_id'	  => $_POST['tasklistid'],
+			'beschrijving'	  => $_POST['details'],
+			'price_per_hour'  => $_POST['pricePerHour'],
 		);
-		global $wpdb;
 		
 		$this->load_model('Timerecording');
 		
-		$current_solve_user = $this->current_solve_user();
-		$timerecordingObject = $this->Timerecording->find_one(array(
-				'conditions' => array(
-						'wp_user_id' => $current_solve_user->id,
-				),
-		));
-		if(!$timerecordingObject){
-			$this->Timerecording->insert($data);
-		}
+		$timerecordingObject = $this->Timerecording->find_one_by_wp_user_id($current_solve_user->id);
 		
+		if(!$timerecordingObject){
+			$this->Timerecording->create($data);
+		}
+	
 		exit();
 	}
 	
@@ -807,10 +795,9 @@ class TimetrackingsController extends MvcPublicController {
 	 * Function to retrieve the timeobject of the current user from the WordPress database. 
 	 *
 	 */
-	function getTimeObject(){
+	function getTimerecording(){
 		$this->load_model('Timerecording');
 		$this->load_model('Ownership');
-		
 		$current_solve_user = $this->current_solve_user();
 
 		$timerecordingObject = $this->Timerecording->find_one(array(
@@ -819,9 +806,9 @@ class TimetrackingsController extends MvcPublicController {
 				),
 		));
 		
-		$timestamp_start = (strtotime($timerecordingObject->timestamp_start)-3599);
-		$timestamp_end = time();
-		$durationInSeconds = $timestamp_end - $timestamp_start;
+		global $wpdb;
+		$durationInSeconds = $wpdb->get_row("SELECT (UNIX_TIMESTAMP(NOW())-UNIX_TIMESTAMP(timestamp_start)) AS timestamp_duration FROM wp_ee_current_timerecording");
+		$durationInSeconds = $durationInSeconds->timestamp_duration; 
 		$seconds = $durationInSeconds%60;
 		if($seconds<10){$seconds = '0'.$seconds;}
 		$minutes = floor($durationInSeconds/60);

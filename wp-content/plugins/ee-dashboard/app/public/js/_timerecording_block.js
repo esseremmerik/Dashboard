@@ -9,7 +9,7 @@ function initTimer(){
 		
 		clockStart('time_recording');
 		
-		var url = 'saveTimeObject';
+		var url = 'saveTimerecording';
 		var aTimeObj = new Array();
 		
 		aTimeObj['autocomplete'] 		= document.getElementById('timerecording_autocomplete').value;

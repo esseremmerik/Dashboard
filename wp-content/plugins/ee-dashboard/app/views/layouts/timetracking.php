@@ -12,6 +12,7 @@ wp_enqueue_style('modal', '/wp-content/plugins/ee-dashboard/app/public/css/modal
 
 wp_enqueue_script('timerec', mvc_js_url('ee-dashboard', 'timetracking.js')); 
 wp_enqueue_script('jquery.autocomplete', mvc_js_url('ee-dashboard', 'jquery.autocomplete.js'));
+
 ?>
 
 <?php //update_timerecords();?>
