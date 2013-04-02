@@ -37,7 +37,7 @@ function initTimer(){
 		document.getElementById('startstop').value="1";
 		document.getElementById('startstop').setAttribute("class", "btn btn-large btn-success");
 
-		jQuery.post('deleteTimeObject', {},function(data){})});
+		jQuery.post('deleteTimeObject');
 		
 		clockStop('time_recording');
 	}
