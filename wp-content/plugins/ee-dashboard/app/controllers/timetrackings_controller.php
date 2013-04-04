@@ -787,7 +787,9 @@ class TimetrackingsController extends MvcPublicController {
 		if(!$timerecordingObject){
 			$this->Timerecording->create($data);
 		}
-	
+		
+		//$this->load_helper('Timerecordings');
+		//$this->timerecordings->saveTijdje();
 		exit();
 	}
 	
@@ -850,6 +852,25 @@ class TimetrackingsController extends MvcPublicController {
 			$this->Timerecording->delete($timerecordingObject->id);
 		}
 		exit();
+	}
+	function updateSolve360Timerecords(){
+		$this->load_helper('solve360');
+		$this->solve360->update_timerecords();
+	}
+	function updateSolve360Tasks(){
+		$this->load_helper('solve360');
+		$this->solve360->update_tasks();
+		
+	}
+	function updateSolve360Ownership(){
+		$this->load_helper('solve360');
+		$this->solve360->update_ownership();
+	
+	}
+	function updateSolve360Tasklist(){
+		$this->load_helper('solve360');
+		$this->solve360->update_tasklist();
+	
 	}
 }
 ?>

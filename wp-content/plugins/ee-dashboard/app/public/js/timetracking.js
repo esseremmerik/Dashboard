@@ -27,7 +27,6 @@ jQuery(document).ready(function() {
 	jQuery.post('getTimerecording', {},function(data){})
 	.complete(function(data){
 		if(data.responseText){
-			console.log(data.responseText);
 			var timerecordingObject = data.responseText;
 			var splitTimerecordingObject = timerecordingObject.split(';;;');
 			

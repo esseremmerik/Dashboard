@@ -29,7 +29,8 @@ function initTimer(){
 			}, function(data){})
 			.success(function(data){})
 			.error(function(){ alert('error jquery.post timeObject');})
-			.complete(function(data){}
+			.complete(function(data){
+			}
 		);
 	}
 	if(value==2){
