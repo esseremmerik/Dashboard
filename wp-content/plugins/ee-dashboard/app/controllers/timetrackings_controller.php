@@ -787,9 +787,6 @@ class TimetrackingsController extends MvcPublicController {
 		if(!$timerecordingObject){
 			$this->Timerecording->create($data);
 		}
-		
-		//$this->load_helper('Timerecordings');
-		//$this->timerecordings->saveTijdje();
 		exit();
 	}
 	
@@ -853,24 +850,40 @@ class TimetrackingsController extends MvcPublicController {
 		}
 		exit();
 	}
-	function updateSolve360Timerecords(){
+	function fillTimerecordTableFromSolve360(){
 		$this->load_helper('solve360');
 		$this->solve360->update_timerecords();
 	}
-	function updateSolve360Tasks(){
+	function fillTaskTableFromSolve360(){
 		$this->load_helper('solve360');
 		$this->solve360->update_tasks();
 		
 	}
-	function updateSolve360Ownership(){
+	function fillOwnershipTableFromSolve360(){
 		$this->load_helper('solve360');
 		$this->solve360->update_ownership();
 	
 	}
-	function updateSolve360Tasklist(){
+	function fillTasklistTableFromSolve360(){
 		$this->load_helper('solve360');
 		$this->solve360->update_tasklist();
 	
+	}
+	function truncateTimerecordTable(){
+		$this->load_helper('Timerecord');
+		$this->timerecord->truncateDatabaseTable();
+	}
+	function truncateTaskTable(){
+		$this->load_helper('Task');
+		$this->task->truncateDatabaseTable();
+	}
+	function truncateOwnershipTable(){
+		$this->load_helper('Ownership');
+		$this->ownership->truncateDatabaseTable();
+	}
+	function truncateTasklistTable(){
+		$this->load_helper('Tasklist');
+		$this->tasklist->truncateDatabaseTable();
 	}
 }
 ?>

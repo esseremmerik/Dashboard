@@ -12,7 +12,7 @@ wp_enqueue_script('jquery.autocomplete', mvc_js_url('ee-dashboard', 'jquery.auto
 
 ?>
 
-<?php //$this->updateSolve360Timerecords();?>
+<?php //$this->fillTasklistTableFromSolve360();?>
 
 <div><?php $this->render_view('layouts/_timerecording_block'); ?></div>
 
