@@ -791,11 +791,11 @@ class TimetrackingsController extends MvcPublicController {
 		$this->load_model('Timerecording');
 		
 		$current_solve_user = $this->current_solve_user();
-		$timerecordingObject = $this->Timerecording->find_one_by_wp_user_id($current_solve_user->id);
+		$timerecordingObject = $this->Timerecording->find_one(array(
 				'conditions' => array(
 						'wp_user_id' => $current_solve_user->id,
 				),
-		
+		));
 		if(!$timerecordingObject){
 			$this->Timerecording->create($data);
 		}
