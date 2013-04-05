@@ -9,7 +9,7 @@ function initTimer(){
 		
 		clockStart('time_recording');
 		
-		var url = 'saveTimeObject';
+		var url = 'saveTimerecording';
 		var aTimeObj = new Array();
 		
 		aTimeObj['autocomplete'] 		= document.getElementById('timerecording_autocomplete').value;
@@ -29,7 +29,8 @@ function initTimer(){
 			}, function(data){})
 			.success(function(data){})
 			.error(function(){ alert('error jquery.post timeObject');})
-			.complete(function(data){}
+			.complete(function(data){
+			}
 		);
 	}
 	if(value==2){

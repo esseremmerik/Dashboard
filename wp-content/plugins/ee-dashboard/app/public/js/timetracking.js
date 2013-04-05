@@ -24,7 +24,7 @@ function hideTrackBlock(){
 	document.getElementById("timerecording_block").style.height=115+"px";
 }
 jQuery(document).ready(function() {
-	jQuery.post('getTimeObject', {},function(data){})
+	jQuery.post('getTimerecording', {},function(data){})
 	.complete(function(data){
 		if(data.responseText){
 			var timerecordingObject = data.responseText;
@@ -237,7 +237,7 @@ function showPopup(){
 	var taak = taakproject[0]; //alleen linkerdeel van de gesplitste string gebruiken.
 	var project = taakproject[1]; //rechterdeel van de gesplitste string.
 	if(project){project = project.replace("]","");	}	
-	if(declarabel<=0){declarabel="Onbetaald :'( ";}
+	if(declarabel <= 0){ declarabel="Onbetaald";}
 	
 	taak = taak.split('['); //gedeelte van het project verwijderen uit string
 	taak = taak[0]; //alleen linkerdeel van de gesplitste string gebruiken.
@@ -274,7 +274,7 @@ function showPopup(){
 			document.getElementById('submit_form').value			='Opslaan';
 			
 			//======Wanneer je over je begroting zit en de extra tijd niet declarabel is============//
-			if(document.getElementById('extratime').value==0){
+			if(document.getElementById('extratime').value==0 && document.getElementById('extratime').value!=''){
 				document.getElementById('modal_declarabel').innerHTML = 'Onbetaald ;-(';
 			}
 			//=====================================//

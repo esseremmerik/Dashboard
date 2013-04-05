@@ -1,8 +1,5 @@
 <?php get_header(); 
 
-define('BASE_PATH', dirname(dirname(dirname(__FILE__))) . "/");
-include BASE_PATH . 'update_wp_database.php';
-
 wp_enqueue_style('general', '/wp-content/plugins/ee-dashboard/app/public/css/general.css'); 
 //wp_enqueue_style('autocomplete', '/wp-content/plugins/ee-dashboard/app/public/css/jquery-ui.css');
 wp_enqueue_style('datepicker', '/wp-content/plugins/ee-dashboard/app/public/css/datepicker.css'); 
@@ -12,9 +9,10 @@ wp_enqueue_style('modal', '/wp-content/plugins/ee-dashboard/app/public/css/modal
 
 wp_enqueue_script('timerec', mvc_js_url('ee-dashboard', 'timetracking.js')); 
 wp_enqueue_script('jquery.autocomplete', mvc_js_url('ee-dashboard', 'jquery.autocomplete.js'));
+
 ?>
 
-<?php //update_timerecords();?>
+<?php //$this->fillTasklistTableFromSolve360();?>
 
 <div><?php $this->render_view('layouts/_timerecording_block'); ?></div>
 
