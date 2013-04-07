@@ -217,14 +217,17 @@ class TimetrackingsController extends MvcPublicController {
     //==================================================================================//
     public function showTimerecordTable(){
     	$this->load_helper('Timerecord');
-    	return $this->timerecord->createTimerecordTable();
+    	$maxRecordsToShow = 5;
+    	return $this->timerecord->createTimerecordTable($maxRecordsToShow);
     }        
         
     //====================================================================================////=================================================================================//
     function initialiseAllTimerecordsTable(){
 	    $this->initialise();
 		$this->load_model('Timerecord');
-	    echo $this->showAllTimerecordTable();
+	    // echo $this->showAllTimerecordTable();
+		$this->load_helper('Timerecord');
+	    echo $this->timerecord->createTimerecordTable();
 	    exit();
     }
     //===========================================================//
