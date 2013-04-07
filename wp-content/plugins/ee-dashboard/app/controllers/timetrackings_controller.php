@@ -216,62 +216,8 @@ class TimetrackingsController extends MvcPublicController {
     }
     //==================================================================================//
     public function showTimerecordTable(){
-    	$current_solve_user = $this->current_solve_user();
-    	$restult_string = "";
-    	$details ="";
-		
-		
-		$result = $this->Timerecord->find(array(
-			'conditions' => array(
-				'person' => $current_solve_user->id,
-			),
-			'order' => 'created DESC',
-			'limit' => 5
-		));
-		$i = 200;
-		foreach($result as $object){	
-			$details = $object->details;
-			if($details){
-				$details=$object->details;
-			}else{
-				$details='-';
-			}
-			$starttijd = explode(":", $object->start);
-			$eindtijd = explode(":", $object->eind);
-			$iKey = $i.$object->id;
-			$result_string .= "
-						<tr>    
-							<td style='max-width:400px;'>" . $details . "</td>
-							<td style='width:25px;margin:5px 0px 5px 3px;'>" . $this->getIcon('tijd_wit') . "</td>
-							<td style='min-width:50px;'>". $object->hours . ' uur' . "</td> 
-							<td style='width:15px;padding:5px 5px 5px 5px;'>" . $this->getIcon('taak') . "</td>
-							<td style='max-width:300px;'>" . $object->parentcn . "</td>
-							<td style='width:19px;padding:5px 5px 5px 10px;'>" . $this->getIcon('map') . "</td>
-							<td style='width:150px;'>" . $object->itemname . "</td>
-							<td style='width:20px;padding:5px 5px 5px 10px;'>" . $this->getIcon('stopwatch_play') . "</td>
-							<td style='min-width:75px;'>" . $starttijd[0].':'.$starttijd[1] . '-' . $eindtijd[0].':'.$eindtijd[1]. "</td>
-							
-							<td style='width:17px;padding-left:5px;'><a id=\"".$iKey."\" href=\"#\" onclick=\"deleteTimerecord($object->id,".$iKey++.");\" name=\"delete_button\"><img class='table_timerecord_delete' src='".mvc_plugin_app_url(MVCMODULENAME)."public/image/delete.png'></a></td>
-							
-							<td style='width:17px;padding-left:5px;'><a href=\"#\" id=".$iKey." onclick=\"editTimerecord($object->id, '".$iKey++."','".str_replace('\'','&rsquo;',$object->details)."','".$object->solve_id."',$object->itemid, $object->parentparentid,
-							$object->parentid, '".str_replace('\'','&rsquo;',$object->parentcn)."','".(string)$object->date."', $object->billable, $object->hours, '".(string)$object->start."', '".(string)$object->eind."', '".str_replace('\'','&rsquo;',$object->itemname)."')\">
-								<img src='".mvc_plugin_app_url(MVCMODULENAME)."public/image/edit.png'/></a>
-							</td>
-							
-							
-							<td style='width:17px;padding-left:0px;'><a id=\"".$iKey."\" href=\"#\" onclick=\"loadTask($object->parentid,'',$object->parentparentid,'".$object->itemid."','".str_replace('\'','&rsquo;',$object->parentcn)."','".$object->itemname."','','','".$iKey."')\" name=\"edit_button\">
-								<img id='timerecord_table_play' class='table_task_start' name='".$i."' src='".mvc_plugin_app_url(MVCMODULENAME)."public/image/play.png'></a>
-							</td>
-						</tr>";
-						
-						$i++;
-			}
-			//id,pricing,tasklistid,projectid,taskname,projectname, spent_time, estimated_time,element_id
-		$result_string = "<table class='table table-hover'>
-							<thead></thead>
-								<tbody>" . $result_string . "</tbody></table>";
-								
-		return $result_string; 
+    	$this->load_helper('Timerecord');
+    	return $this->timerecord->createTimerecordTable();
     }        
         
     //====================================================================================////=================================================================================//

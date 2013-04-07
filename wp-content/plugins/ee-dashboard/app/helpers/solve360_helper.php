@@ -2,7 +2,7 @@
 require_once 'Solve360Service.php';
 
 class Solve360Helper extends MvcHelper {
-	var $user_data;
+	var $user_info;
 	var $user_meta;
 	
 	var $userEmail;

@@ -21,7 +21,8 @@ wp_enqueue_script('jquery.autocomplete', mvc_js_url('ee-dashboard', 'jquery.auto
 <button class='btn btn-large btn-success' onclick="showAllTimerecords();">Alle tijdregistraties</button></a>
 <button class='btn btn-large btn-success' onclick="showGhostTimerecords();">Niet gekoppelde tijdregistraties</button></a>
 <button class='btn btn-large btn-success' style='margin-left:50px;' onclick="update_tasktasklist();">Update taak/taaklijst</button></a>
-	
+
+
 <div id='wrapper'>
 
 <!-- ========= Tabel met de 5 snelst eindigende deadlines ================= -->
