@@ -42,7 +42,6 @@ class TimerecordHelper extends MvcHelper {
 							".$maxRecords." ");
 		
 		$i = 200;
-		$testNumber = 0;
 		foreach($result as $object){
 			$details = $object->details;
 			if($details){
@@ -95,9 +94,7 @@ class TimerecordHelper extends MvcHelper {
 						";
 		
 			$i++; 
-			$testNumber++;
 			$result_string .= $string;
-			//echo $result_string."<br /><br /><br />";
 			$previousDate = $object->date;
 		}
 		//id,pricing,tasklistid,projectid,taskname,projectname, spent_time, estimated_time,element_id
