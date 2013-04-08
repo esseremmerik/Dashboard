@@ -3,3 +3,4 @@ wp-config.php
 .DS_Store
 Icon
 /wp-content/uploads/pagelines
+/wp-content/plugins/ee-dashboard/app/views/layouts/data.txt
