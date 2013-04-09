@@ -57,7 +57,7 @@ class Solve360Helper extends MvcHelper {
 			$result = $wpdb->insert('wp_solve360_timerecord',$data);
 		}
 	}
-	function update_tasks(){
+	function update_taskTable(){
 		global $wpdb;
 		$last  			= 'created';
 		$type 			= 14;
@@ -101,10 +101,11 @@ class Solve360Helper extends MvcHelper {
 					'viewed' 			=> $task->viewed,
 					'updated' 			=> $task->updated,
 			);
-			$result = $wpdb->insert($wpdb->prefix. 'solve360_task',$data);
+			$result = $wpdb->insert('wp_solve360_task',$data);
 		}
+		return;
 	}
-	function update_ownership(){
+	function update_ownershipTable(){
 		global $wpdb;
 		$solve360Service= new Solve360Service($this->userEmail, $this->userToken);
 		$ownerArray 		= $solve360Service->getOwnership();
@@ -119,10 +120,11 @@ class Solve360Helper extends MvcHelper {
 					'preventprivatedata'=> $user->preventprivatedata,
 					'administrator' 	=> $user->administrator
 			);
-			$result = $wpdb->insert($wpdb->prefix. 'solve360_ownership',$data);
+			$result = $wpdb->insert('wp_solve360_ownership',$data);
 		}
+		return;
 	}
-	function update_tasklist(){
+	function update_tasklistTable(){
 		global $wpdb;
 		$solve360Service = new Solve360Service($this->userEmail, $this->userToken);
 		$type = 22;
@@ -150,8 +152,9 @@ class Solve360Helper extends MvcHelper {
 					'attendees' => $tasklist->fields->attendees,
 					'description' => $tasklist->fields->description,
 			);
-			$result = $wpdb->insert($wpdb->prefix. 'solve360_tasklist',$data);
+			$result = $wpdb->insert('wp_solve360_tasklist',$data);
 		}
+		return;
 	}
 	
 	/*

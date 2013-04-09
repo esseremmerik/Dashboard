@@ -307,7 +307,10 @@ function refresh_timerecordTable(){
 		})
 		.success(function(){/*alert('timerecord Tabel is vernieuwd');*/})
 		.error(function(){/*alert('Tabel kan door onbekende reden niet vernieuwd worden');*/})
-		.complete(function(data){/*alert('refresh timerecordtable complete');*/jQuery('#timerecord_table').empty().append(data.responseText);refresh_taskTable();});
+		.complete(function(data){/*alert('refresh timerecordtable complete');*/
+			console.log(data.responseText);
+				jQuery('#timerecord_table').empty().append(data.responseText);
+				refresh_taskTable();});
 	});
 }
 function showAllTasks(){
@@ -362,10 +365,10 @@ function showTop5(){
 }
 function update_tasktasklist(){
 	jQuery(document).ready(function() {
-		jQuery.post('/timetrackings/updateTaskTaskList', function(data) {
+		jQuery.post('/timetrackings/updateAllTablesFromSolve360', function(data) {
 		})
 		.success(function(){/*alert('Tabel is vernieuwd');*/})
-		.error(function(){/*alert('Tabel kan door onbekende reden niet vernieuwd worden')*/;})
+		.error(function(){/*alert('Tabel kan door onbekende reden niet vernieuwd worden');*/})
 		.complete(function(data){
 			alert('Succesvol bijgewerkt');
 			refresh_taskTable();

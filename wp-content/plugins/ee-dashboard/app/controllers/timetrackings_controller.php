@@ -33,7 +33,8 @@ class TimetrackingsController extends MvcPublicController {
 	    define('MVCMODULENAME', 'ee-dashboard');
 	  	$this->load_model('Ownership');
 	  	$this->load_model('Tasklist');    
-	   	$this->current_solve_user();	 
+	   	$this->current_solve_user();	
+	   	return; 
     }
     
     function initialiseTaskTable(){
@@ -209,13 +210,14 @@ class TimetrackingsController extends MvcPublicController {
     
     //==================================================================================////==================================================================================//
     function initialiseTimerecordTable(){
-	    $this->initialise();
-		$this->load_model('Timerecord');
+	     $this->initialise();
+		//$this->load_model('Timerecord');
 		echo $this->showTimerecordTable();
 		exit();
     }
     //==================================================================================//
     public function showTimerecordTable(){
+    	//define('MVCMODULENAME', 'ee-dashboard');
     	$this->load_helper('Timerecord');
     	$maxRecordsToShow = 5;
     	return $this->timerecord->createTimerecordTable($maxRecordsToShow);
@@ -687,7 +689,7 @@ class TimetrackingsController extends MvcPublicController {
 	    								'updated'		=> date('Y-m-d H:i:s')
 	    								));
     }
-    function updateTaskTaskList(){
+    /*function updateTaskTaskList(){
 		define('BASE_PATH', dirname(dirname(__FILE__)) . "/");
 		include BASE_PATH . 'update_wp_database.php';
 
@@ -704,7 +706,7 @@ class TimetrackingsController extends MvcPublicController {
 		update_tasks();
 		update_ownership();
 		return;
-	}
+	}*/
 	/**
 	 * Function to save a timerecording which contains information about a running time of a employee.
 	 * <br />The idea is that when a employee starts the timer, this function is called.
@@ -816,37 +818,73 @@ class TimetrackingsController extends MvcPublicController {
 	function fillTimerecordTableFromSolve360(){
 		$this->load_helper('solve360');
 		$this->solve360->update_timerecords();
+		reuturn;
 	}
 	function fillTaskTableFromSolve360(){
 		$this->load_helper('solve360');
-		$this->solve360->update_tasks();
-		
+		$this->solve360->update_taskTable();
+		return;
+		exit();
 	}
 	function fillOwnershipTableFromSolve360(){
 		$this->load_helper('solve360');
-		$this->solve360->update_ownership();
+		$this->solve360->update_ownershipTable();
+		return;
+		exit();
 	
 	}
 	function fillTasklistTableFromSolve360(){
 		$this->load_helper('solve360');
-		$this->solve360->update_tasklist();
+		$this->solve360->update_tasklistTable();
+		return;
+		exit();
 	
 	}
 	function truncateTimerecordTable(){
 		$this->load_helper('Timerecord');
 		$this->timerecord->truncateDatabaseTable();
+		return;
 	}
 	function truncateTaskTable(){
 		$this->load_helper('Task');
 		$this->task->truncateDatabaseTable();
+		return;
 	}
 	function truncateOwnershipTable(){
 		$this->load_helper('Ownership');
 		$this->ownership->truncateDatabaseTable();
+		return;
 	}
 	function truncateTasklistTable(){
 		$this->load_helper('Tasklist');
 		$this->tasklist->truncateDatabaseTable();
+		return;
+	}
+	function updateTimerecordTable(){
+		$this->truncateTimerecordTable();
+		$this->fillTimerecordTableFromSolve360();
+		return;
+	}
+	function updateTaskTable(){
+		$this->truncateTaskTable();
+		$this->fillTaskTableFromSolve360();
+		return;
+	}
+	function updateOwnershipTable(){
+		$this->truncateOwnershipTable();
+		$this->fillOwnershipTableFromSolve360();
+		return;
+	}
+	function updateTasklistTable(){
+		$this->truncateTasklistTable();
+		$this->fillTasklistTableFromSolve360();
+		return;
+	}
+	function updateAllTablesFromSolve360(){
+		//$this->updateTimerecordTable();
+		$this->updateTaskTable();
+		$this->updateOwnershipTable();
+		$this->updateTasklistTable();
 	}
 }
 ?>
