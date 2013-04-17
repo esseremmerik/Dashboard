@@ -306,9 +306,8 @@ function refresh_timerecordTable(){
 				
 		})
 		.success(function(){/*alert('timerecord Tabel is vernieuwd');*/})
-		.error(function(){/*alert('Tabel kan door onbekende reden niet vernieuwd worden');*/})
+		.error(function(){console.log('Tabel kan door onbekende reden niet vernieuwd worden');})
 		.complete(function(data){/*alert('refresh timerecordtable complete');*/
-			console.log(data.responseText);
 				jQuery('#timerecord_table').empty().append(data.responseText);
 				refresh_taskTable();});
 	});

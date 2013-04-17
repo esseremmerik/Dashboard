@@ -96,21 +96,48 @@ class TimerecordHelper extends MvcHelper {
 					</td>
 				</tr>"
 			;
+			if($timerecordCounter==$amountOfTimerecords){	
+				$date = strftime("%A %e %B",strtotime($previousDate));
+				if(!$equalDates){
+					//create a table block with header from previous timerecord block
+					$tableEnd = "</tbody></table><br />";
+					$tableStart = $this->createTableHeader($date, $totalWorkingHours);
+					$tableBlockOfOneDay .= $tableEnd . $tableStart . $tableRecordsOfOneDay;
+					$totalWorkingHours = 0;
+					$tableBlockOfAllDays .= $tableBlockOfOneDay;
+					$tableRecordsOfOneDay = '';
+					$tableBlockOfOneDay= '';
+					
+					//create header above last timerecord 
+					$previousDate = $timerecord->date;
+					$date = strftime("%A %e %B",strtotime($previousDate));
+					$tableRecordsOfOneDay = $tableRecord;
+					$tableEnd = "</tbody></table><br />";
+					$totalWorkingHours = $timerecord->hours;
+					$tableStart = $this->createTableHeader($date, $totalWorkingHours);
+					$tableBlockOfOneDay .= $tableEnd . $tableStart . $tableRecordsOfOneDay;
+					$totalWorkingHours = 0;
+					$tableBlockOfAllDays .= $tableBlockOfOneDay;
+				}
+				else{
+					$tableEnd = "</tbody></table><br />";
+					$totalWorkingHours = $totalWorkingHours + $timerecord->hours;
+					$tableStart = $this->createTableHeader($date, $totalWorkingHours);
+					$totalWorkingHours = 0;
+					$tableRecordsOfOneDay .= $tableRecord;
+					$tableBlockOfOneDay .= $tableEnd . $tableStart . $tableRecordsOfOneDay;
+					$tableBlockOfAllDays .= $tableBlockOfOneDay;
+					$tableRecordsOfOneDay = '';
+				}
+			}
 			
 			//wanneer er een datum boven een groep timerecords moet komen
-			if((!$equalDates && $previousDate!='') || $timerecordCounter==$amountOfTimerecords){
-				
-				//wanneer laatste record
-				if($timerecordCounter==$amountOfTimerecords){
-					$totalWorkingHours = $totalWorkingHours + $timerecord->hours;
-					$tableRecordsOfOneDay .= $tableRecord;
-				}
+			if(!$equalDates && $previousDate!='' && $timerecordCounter!=$amountOfTimerecords){
 				$date = strftime("%A %e %B",strtotime($previousDate));
+				
 				$tableEnd = "</tbody></table><br />";
-				$tableStart = "<table class='table table-hover'>
-					<thead><strong><span style='font-size:18px;'>".$date. "</span><span style='margin-left:10%;'>Werktijd: ".$totalWorkingHours."uur</span></strong></thead>
-					<tbody>"
-				;
+				$tableStart = $this->createTableHeader($date, $totalWorkingHours);
+				
 				$totalWorkingHours = 0;
 				$tableBlockOfOneDay .= $tableEnd . $tableStart . $tableRecordsOfOneDay;
 				$tableBlockOfAllDays .= $tableBlockOfOneDay;
@@ -139,6 +166,13 @@ class TimerecordHelper extends MvcHelper {
 			$result = true;
 		}
 		return $result;
+	}
+	function createTableHeader($date, $totalWorkingHours){
+		$tableHeader = "<table class='table table-hover'>
+					<thead><strong><span style='font-size:18px;'>".$date. "</span><span style='margin-left:10%;'>Werktijd: ".$totalWorkingHours."uur</span></strong></thead>
+					<tbody>"
+		;
+		return $tableHeader;
 	}
 	
 }
