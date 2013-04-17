@@ -217,6 +217,7 @@ class TimetrackingsController extends MvcPublicController {
     }
     //==================================================================================//
     public function showTimerecordTable(){
+    	//MVCMODULENAME is nodig om getIcon() te laten werken wanneer aangeroepen via JS
     	//define('MVCMODULENAME', 'ee-dashboard');
     	$this->load_helper('Timerecord');
     	$maxRecordsToShow = 5;
