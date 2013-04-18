@@ -1,5 +1,5 @@
 <?php
-include 'toolbox_helper.php';
+include_once 'toolbox_helper.php';
  
 class TimerecordHelper extends MvcHelper {
 	var $toolbox;

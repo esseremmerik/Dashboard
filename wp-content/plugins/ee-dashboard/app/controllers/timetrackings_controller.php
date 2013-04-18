@@ -48,74 +48,9 @@ class TimetrackingsController extends MvcPublicController {
     
     //===============================================================////==================================================================//
     public function showTaskTable(){
-    	$current_solve_user = $this->current_solve_user();
-    	$restult_string = "";
-    	$details ="";
-    	
-    	$result = $this->Task->find(array(
-			'conditions' => array(
-				'assignedto' => $current_solve_user->id,
-    			'completed' => '0',
-			),
-			'order' => 'duedate DESC',
-			'limit' => 5
-		));
-		$i=100;
-		foreach($result as $object){
-			$timerecords = $this->Timerecord->find(array(
-										'conditions' => array(
-											'person' => $current_solve_user->id,
-											'parentid' => $object->solve_id),
-			));
-			$tasklists = $this->Tasklist->find(array(
-										'conditions' => array(
-											'id' => $object->parent)
-			));
-			$spent_time = 0;
-			foreach($timerecords as $timerecord){			
-				$spent_time += (double)$timerecord->hours;				
-			}
-			$tasklist_name = '';
-			foreach($tasklists as $tasklist){
-				$tasklistname = $tasklist->name;
-			}
-			$timeremains = '-';
-			$duedate = '-';
-			$duedate = explode(" ", $object->duedate);
-			$duedate = $duedate[0];
-			$duedate = explode("-", $duedate);
-			$duedate = $duedate[2].'-'.$duedate[1].'-'.$duedate[0];
-			if($duedate=='00-00-0000'){$duedate='-';}
-			$money_icon = $this->getIcon('money');
-			$tracked_time = $this->getIcon('tijd_groen');
-			if($object->pricing<=0){$money_icon=$this->getIcon('no_payment');}
-			if($object->estimated_time>0){$timeremains=$object->estimated_time;}
-			if($spent_time>($timeremains*0.75) && $timeremains>0){$tracked_time=$this->getIcon('tijd_oranje');}
-			if($spent_time>$timeremains && $timeremains>0){$tracked_time=$this->getIcon('tijd_rood');} 
-			if($timeremains>0){$timeremains=$timeremains .  ' uur';}
-			$iKey = $i.$object->id;
-			$result_string .= "
-						<tr id='table_tasks'>    
-							<td style='padding:5px 3px 5px 10px;'>" . $this->getIcon('taak') . "</td>
-							<td name='".$i."'>" . $object->title . "</td>
-							<td style='padding:5px 0px 5px 10px;'>" . $tracked_time . "</td>
-							<td name='".$i."' style='width:50px;'>".  $spent_time . ' uur' . "</td>
-							<td style='width:20px;padding:5px 1px 5px 5px;'>" . $this->getIcon('klok_wit') . "</td>
-							<td name='".$i."' style='width:40px'>".  $timeremains . "</td> 
-							<td style='width:25px;padding:3px 0px 3px 10px;'>" . $this->getIcon('deadline_wit') . "</td>
-							<td name='".$i."' style='width:70px;'>" . $duedate . "</td>
-							<td style='padding:5px 3px 5px 5px;'>" . $this->getIcon('map') . "</td>
-							<td name='".$i."'>" . $object->itemname . "</td>
-							<td style='width:60px;padding:5px 3px 2px 10px;'>" . '<strong>Geld: </strong>' .  $money_icon . "</td>
-							<td style='width:17px;padding-left:20px;'>
-								<a id=\"".$iKey."\" href=\"#\" onclick=\"loadTask($object->solve_id,$object->pricing,$object->parent,$object->itemid,'".str_replace('\'','&rsquo;',$object->title)."','$object->itemname', '".str_replace('\'','&rsquo;',$spent_time)."', '".str_replace(' uur','',$timeremains)."','".$iKey."', '".$object->id."');\">
-									<img class='table_task_start' name='".$i."' src='".mvc_plugin_app_url(MVCMODULENAME)."public/image/play.png'></a></td>		
-						</tr>";
-				
-			$i++;
-		}
-		$result_string = "<table class='table table-hover'><thead></thead><tbody>" . $result_string . "</tbody></table>";
-		return $result_string; 
+    	$this->load_helper('Task');
+    	$maxRecordsToShow = 5;
+    	return $this->task->createTaskTable($maxRecordsToShow);
     }
     
     
@@ -211,7 +146,6 @@ class TimetrackingsController extends MvcPublicController {
     //==================================================================================////==================================================================================//
     function initialiseTimerecordTable(){
 	     $this->initialise();
-		//$this->load_model('Timerecord');
 		echo $this->showTimerecordTable();
 		exit();
     }

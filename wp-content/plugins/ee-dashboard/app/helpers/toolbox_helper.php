@@ -29,5 +29,12 @@ class ToolboxHelper extends MvcHelper {
     						WHERE email = '".$this->userEmail."'");
     	return $solveUserObject;
     }
+    function dateTimeToDate($dateTimeObject){
+    	$dateTimeObject = explode(" ", $dateTimeObject);
+    	$dateTimeObject = $dateTimeObject[0];
+    	$dateTimeObject = explode("-", $dateTimeObject);
+    	$dateTimeObject = $dateTimeObject[2].'-'.$dateTimeObject[1].'-'.$dateTimeObject[0];
+    	return $dateTimeObject;
+    }
 }
 ?>
