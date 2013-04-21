@@ -18,7 +18,7 @@ class ToolboxHelper extends MvcHelper {
 	    $BASE_URL = mvc_plugin_app_url(MVCMODULENAME) . "public/image/";
 	    $ICON_NAME = $name;
 	    $ICON_FILE = '.png';
-	    $ICON_STRING = '<img src=' . $BASE_URL . $ICON_NAME . $ICON_FILE . '>';
+	    $ICON_STRING = "<img src='". $BASE_URL . $ICON_NAME . $ICON_FILE ."'>";
 	    return $ICON_STRING;
     }
     function getCurrentSolveUser(){
